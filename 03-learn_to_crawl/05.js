@@ -25,3 +25,40 @@
  * support for it is not everywhere.
  */
 
+
+// Variables (toutes sous forme de chaînes de caractères)
+let myName = "Adama"; // ton nom
+let greeting = "Good day to you"; // salutation
+let friendName = "Sam"; // nom d'un ami
+let familyName = "Marie"; // nom d'un membre de la famille
+let dateNumber = "10"; // numéro du jour (au format chaîne)
+let monthName = "July"; // nom du mois
+let yearString = "2026"; // année (chaîne)
+let ageString = "30"; // âge (chaîne)
+
+// 1) Salutation à ton ami
+// - concaténation
+console.log("Concat - Greeting friend:", greeting + ", " + friendName + "!");
+// - interpolation
+console.log("Template - Greeting friend:", `${greeting}, ${friendName}!`);
+
+// 2) Salutation à un membre de la famille
+// - concaténation
+console.log("Concat - Greeting family:", greeting + ", " + familyName + "!");
+// - interpolation
+console.log("Template - Greeting family:", `${greeting}, ${familyName}!`);
+
+// 3) Salutation à l'ami en indiquant la date et le mois
+// - concaténation
+console.log("Concat - Friend with date:", greeting + ", " + friendName + ". Today is " + dateNumber + " " + monthName + ".");
+// - interpolation
+console.log("Template - Friend with date:", `${greeting}, ${friendName}. Today is ${dateNumber} ${monthName}.`);
+
+// 4) "In 20 years I will be XXX years old" - calcul fait sans créer de nouvelles variables
+// - concaténation (on convertit ageString en nombre pour calculer)
+console.log("Concat - In 20 years:", "In 20 years I will be " + (Number(ageString) + 20) + " years old.");
+// - interpolation
+console.log("Template - In 20 years:", `In 20 years I will be ${Number(ageString) + 20} years old.`);
+
+// Remarque: `yearString` est disponible si tu veux l'utiliser ailleurs (ex: affichage complet de la date)
+

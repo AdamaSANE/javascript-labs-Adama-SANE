@@ -1,15 +1,11 @@
 // Debug and modify the code so that the console does not display any errors.
 // The emoji should be displayed on the console.
 
-true = false
-
-let amILearning = false
-
-
-
+// Supprime l'affectation invalide et active l'apprentissage
+let amILearning = true;
 
 // Do not change anything below this line
 
-if (amILearning == true){
-    console.log("(ᵔᴥᵔ)")
+if (amILearning == true) {
+  console.log("(ᵔᴥᵔ)");
 }
