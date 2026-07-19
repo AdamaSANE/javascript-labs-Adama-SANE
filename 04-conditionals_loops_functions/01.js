@@ -1,5 +1,5 @@
-function getRandomNumber(){
-    return Math.floor((Math.random() * 10) + 1);
+function getRandomNumber() {
+  return Math.floor(Math.random() * 10 + 1);
 }
 
 /**
@@ -40,7 +40,43 @@ function getRandomNumber(){
  *
  */
 
-let randomNumber = getRandomNumber() + getRandomNumber()
+let age = Math.floor(Math.random() * 100) + 1;
+let price = 0;
+let fare = "";
 
-console.log(randomNumber)
+// 1 chance sur 10 d'obtenir un trajet gratuit.
+let isLucky = getRandomNumber() === 1;
 
+if (age < 5 || isLucky) {
+  price = 0;
+  fare = "free";
+} else if (age < 13) {
+  price = 3;
+  fare = "child";
+} else if (age < 21) {
+  price = 5;
+  fare = "teenager";
+} else if (age < 30) {
+  price = 7;
+  fare = "young person";
+} else if (age < 65) {
+  price = 10;
+  fare = "adult";
+} else {
+  price = 4;
+  fare = "pensioner";
+}
+
+if (price === 0) {
+  if (age < 5) {
+    console.log(
+      `You pay the ${fare} fare, that will be ${price} dollars, please.`,
+    );
+  } else {
+    console.log("Lucky you! Today you get to ride free of charge.");
+  }
+} else {
+  console.log(
+    `You pay the ${fare} fare, that will be ${price} dollars, please.`,
+  );
+}

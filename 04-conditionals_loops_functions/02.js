@@ -14,3 +14,18 @@
  * find both ways!
  *
  */
+
+for (let number = 5; number <= 1000; number += 5) {
+  console.log(number);
+}
+
+for (let number = 100; number >= -100; number -= 1) {
+  console.log(number);
+}
+
+let currentNumber = 0;
+
+for (let iteration = 0; iteration < 5000; iteration += 1) {
+  currentNumber += iteration % 2 === 0 ? 3 : -1;
+  console.log(currentNumber);
+}

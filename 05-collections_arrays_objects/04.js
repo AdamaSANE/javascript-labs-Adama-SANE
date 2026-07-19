@@ -20,5 +20,84 @@
  *
  */
 
-let avgTempInCity = getAvgTemp("Vancouver", "C");
-console.log(avgTempInCity);
+function fToC(fahrenheit) {
+  return ((fahrenheit - 32) * 5) / 9;
+}
+
+function cToF(celsius) {
+  return (celsius * 9) / 5 + 32;
+}
+
+function getConvertedTemperature(entry, targetScale) {
+  if (targetScale === "C") {
+    return entry.Scale === "Celsius"
+      ? entry.Temperature
+      : fToC(entry.Temperature);
+  }
+
+  return entry.Scale === "Fahrenheit"
+    ? entry.Temperature
+    : cToF(entry.Temperature);
+}
+
+function getAverageTemperature(entries, targetScale) {
+  let total = 0;
+
+  for (let i = 0; i < entries.length; i += 1) {
+    total += getConvertedTemperature(entries[i], targetScale);
+  }
+
+  return total / entries.length;
+}
+
+(async function () {
+  const response = await fetch("./weather.json");
+  const weather = await response.json();
+  const data = weather.data;
+
+  let vancouverEntries = [];
+  let jerusalemEntries = [];
+
+  for (let i = 0; i < data.length; i += 1) {
+    const entry = data[i];
+
+    if (entry.City === "Vancouver") {
+      vancouverEntries.push(entry);
+      console.log(`${getConvertedTemperature(entry, "C")}C`);
+    }
+
+    if (entry.City === "Jerusalem") {
+      jerusalemEntries.push(entry);
+      console.log(`${getConvertedTemperature(entry, "F")}F`);
+    }
+  }
+
+  const vancouverAverageC = getAverageTemperature(vancouverEntries, "C");
+  const vancouverAverageF = getAverageTemperature(vancouverEntries, "F");
+  const jerusalemAverageC = getAverageTemperature(jerusalemEntries, "C");
+  const jerusalemAverageF = getAverageTemperature(jerusalemEntries, "F");
+
+  console.log(
+    `The average temperature in Vancouver in Celsius is ${vancouverAverageC}`,
+  );
+  console.log(
+    `The average temperature in Vancouver in Fahrenheit is ${vancouverAverageF}`,
+  );
+  console.log(
+    `The average temperature in Jerusalem in Celsius is ${jerusalemAverageC}`,
+  );
+  console.log(
+    `The average temperature in Jerusalem in Fahrenheit is ${jerusalemAverageF}`,
+  );
+
+  function getAvgTemp(city, scale) {
+    const cityEntries =
+      city === "Vancouver" ? vancouverEntries : jerusalemEntries;
+    return getAverageTemperature(cityEntries, scale);
+  }
+
+  let avgTempInCity = getAvgTemp("Vancouver", "C");
+  console.log(avgTempInCity);
+})().catch(function (error) {
+  console.error("Unable to load weather data.", error);
+});
