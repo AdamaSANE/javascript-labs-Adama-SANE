@@ -13,7 +13,7 @@
  *
  * Remove the first sub array containing headers without manually deleting it.
  * Do you remember the method to remove the first element of an array?
- * 
+ *
  * Then, using forEach and arrow functions:
  *
  * 1. Output the total amount of expenses for 2017 and 2018.
@@ -35,7 +35,7 @@ let expenses = [
     "Amount",
     "Account",
     "Account #",
-    "Institution"
+    "Institution",
   ],
   [
     "2018-02-14T05:00:00.000Z",
@@ -938,3 +938,67 @@ let expenses = [
     "Bank of America - Credit Card",
   ],
 ];
+
+// --- Solution: suppression de l'entête et calculs demandés ---
+
+// Supprimer la première sous-array contenant les en-têtes (sans suppression manuelle)
+expenses.shift();
+
+// 1) Total des dépenses pour 2017 et 2018 (les montants négatifs sont des dépenses)
+let total2017 = 0;
+let total2018 = 0;
+expenses.forEach((row) => {
+  const [dateStr, , , amount] = row;
+  const year = new Date(dateStr).getFullYear();
+  if (year === 2017 && amount < 0) total2017 += amount;
+  if (year === 2018 && amount < 0) total2018 += amount;
+});
+console.log("Dépenses 2017:", total2017.toFixed(2));
+console.log("Dépenses 2018:", total2018.toFixed(2));
+
+// 2) Total payé pour 'Groceries'
+let groceriesTotal = 0;
+expenses.forEach((row) => {
+  const [, , category, amount] = row;
+  if (category === "Groceries") groceriesTotal += amount;
+});
+console.log("Total Groceries:", groceriesTotal.toFixed(2));
+
+// 3) Différence totale par compte après toutes les transactions
+const accountDiffs = {};
+expenses.forEach((row) => {
+  const [, , , amount, account] = row;
+  accountDiffs[account] = (accountDiffs[account] || 0) + amount;
+});
+console.log("Différences par compte:");
+Object.keys(accountDiffs).forEach((acc) => {
+  console.log(" -", acc + ":", accountDiffs[acc].toFixed(2));
+});
+
+// 4) Nouveau tableau pour les catégories 'Eating Out' (date, description, amount)
+const eatingOut = [];
+expenses.forEach((row) => {
+  const [dateStr, desc, category, amount] = row;
+  if (category === "Eating Out") eatingOut.push([dateStr, desc, amount]);
+});
+console.log("Eating Out — lignes:", eatingOut.length);
+
+// 5) Nouveau tableau pour les catégories 'Gear and Clothing' (date, description, amount)
+const gearAndClothing = [];
+expenses.forEach((row) => {
+  const [dateStr, desc, category, amount] = row;
+  if (category === "Gear and Clothing")
+    gearAndClothing.push([dateStr, desc, amount]);
+});
+console.log("Gear and Clothing — lignes:", gearAndClothing.length);
+
+// Export pour tests/imports éventuels
+module.exports = {
+  expenses,
+  total2017,
+  total2018,
+  groceriesTotal,
+  accountDiffs,
+  eatingOut,
+  gearAndClothing,
+};
