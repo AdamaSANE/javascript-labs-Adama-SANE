@@ -4,22 +4,41 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Portfolio — Projet</title>
-    <!-- Feuille de style minimale -->
     <link rel="stylesheet" href="portfolio.css" />
   </head>
   <body>
-    <!-- En-tête du site -->
     <header>
-      <h1>Mon Portfolio</h1>
+      <div>
+        <p class="eyebrow">Projet HTML, CSS et JavaScript</p>
+        <h1>Mon Portfolio</h1>
+      </div>
+
+      <div class="controls" aria-label="Contrôles d'affichage">
+        <button type="button" id="theme-toggle">Dark mode</button>
+        <button
+          type="button"
+          id="text-smaller"
+          aria-label="Réduire la taille du texte"
+        >
+          -
+        </button>
+        <button
+          type="button"
+          id="text-larger"
+          aria-label="Augmenter la taille du texte"
+        >
+          +
+        </button>
+      </div>
     </header>
 
-    <!-- Contenu principal: colonne principale (75%) + sidebar (25%) -->
     <main class="container">
-      <section class="content">
+      <section class="content panel">
         <h2>À propos</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          elit eget gravida cum sociis.
+          elit eget gravida cum sociis. Dignissim diam quis enim lobortis
+          scelerisque fermentum.
         </p>
 
         <h2>Projets récents</h2>
@@ -40,7 +59,7 @@
         </article>
       </section>
 
-      <aside class="sidebar">
+      <aside class="sidebar panel">
         <h3>Contact</h3>
         <p>Nom: Mon Nom</p>
         <p>Email: exemple@domaine.com</p>
@@ -54,14 +73,10 @@
       </aside>
     </main>
 
-    <!-- Pied de page -->
     <footer>
       <small>© <span id="year"></span> Mon Portfolio</small>
     </footer>
 
-    <!-- Petit script pour afficher l'année courante -->
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
+    <script src="portfolio.js"></script>
   </body>
 </html>
